@@ -1,0 +1,27 @@
+# Core
+python-dotenv==1.0.0
+requests==2.31.0
+pandas==2.1.4
+pyarrow==14.0.2
+sqlalchemy==2.0.25
+
+# Spark + Delta
+pyspark==3.5.0
+delta-spark==3.0.0
+
+# DBT
+dbt-core==1.7.4
+dbt-duckdb==1.7.0
+dbt-snowflake==1.7.1
+dbt-utils==1.1.1
+
+# Local warehouse
+duckdb==0.9.2
+
+# Data quality
+great-expectations==0.18.8
+
+# Testing & linting
+pytest==7.4.3
+pytest-cov==4.1.0
+ruff==0.1.9

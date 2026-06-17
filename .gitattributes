@@ -1,0 +1,10 @@
+*.sql linguist-language=SQL
+*.tf linguist-language=HCL
+*.yml linguist-detectable=true
+*.yaml linguist-detectable=true
+dbt_lakehouse/** linguist-language=SQL
+databricks/*.py linguist-language=Python
+
+# Treat notebooks correctly
+*.py text eol=lf
+*.sql text eol=lf

@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+.Python
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Data — never commit
+data/
+*.parquet
+*.delta
+_delta_log/
+
+# DBT
+dbt_lakehouse/target/
+dbt_lakehouse/dbt_packages/
+dbt_lakehouse/logs/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+!*.tfvars.example
+
+# Great Expectations
+quality/great_expectations/uncommitted/
+
+# Environment & secrets
+.env
+.env.*
+*.env
+*.pem
+*.key
+secrets.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Databricks
+.databricks/

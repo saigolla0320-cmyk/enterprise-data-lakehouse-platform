@@ -1,0 +1,45 @@
+{
+  "sources": [
+    {
+      "name": "customer_transactions",
+      "type": "flat_file",
+      "path": "data/landing/transactions.csv",
+      "format": "csv",
+      "description": "Daily customer transaction export from the billing system",
+      "sla_hours": 6,
+      "owner": "billing-team"
+    },
+    {
+      "name": "product_catalog",
+      "type": "rest_api",
+      "url": "https://api.internal.example.com/v2/products",
+      "params": {
+        "page_size": 1000,
+        "active_only": true
+      },
+      "description": "Product master data from the catalog microservice",
+      "sla_hours": 24,
+      "owner": "catalog-team"
+    },
+    {
+      "name": "customer_master",
+      "type": "database",
+      "connection_string": "${CRM_DB_CONNECTION}",
+      "query": "SELECT customer_id, segment, region, signup_date, lifetime_value FROM customers WHERE updated_at >= CURRENT_DATE - INTERVAL '1 day'",
+      "description": "Customer master data from the CRM PostgreSQL database",
+      "sla_hours": 12,
+      "owner": "crm-team"
+    },
+    {
+      "name": "web_events",
+      "type": "flat_file",
+      "path": "data/landing/web_events.json",
+      "format": "json",
+      "description": "Clickstream events exported from the web analytics platform",
+      "sla_hours": 3,
+      "owner": "analytics-team"
+    }
+  ],
+  "bronze_retention_days": 90,
+  "default_partition_column": "ingest_date"
+}
