@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: mart_daily_revenue
+    description: >
+      Gold-layer daily revenue rollup by customer segment and region.
+      Powers the executive revenue dashboard in Power BI.
+    columns:
+      - name: transaction_date
+        description: "Calendar date of the transactions"
+        tests:
+          - not_null
+      - name: customer_segment
+        description: "CRM-assigned customer segment"
+      - name: total_revenue
+        description: "Sum of transaction amounts for the day/segment/region"
+        tests:
+          - not_null
+      - name: active_customers
+        description: "Distinct customers who transacted"
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+
+  - name: mart_customer_360
+    description: >
+      Gold-layer customer 360 view combining CRM master data with
+      actual transaction behavior. Used for segmentation and retention.
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier"
+        tests:
+          - unique
+          - not_null
+      - name: value_tier
+        description: "Customer tier derived from actual lifetime spend"
+        tests:
+          - accepted_values:
+              values: ['platinum', 'gold', 'silver', 'bronze']
+      - name: engagement_status
+        description: "Recency-based engagement classification"
+        tests:
+          - accepted_values:
+              values: ['active', 'at_risk', 'churned']

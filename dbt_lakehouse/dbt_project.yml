@@ -1,0 +1,28 @@
+name: lakehouse_dbt
+version: "1.0.0"
+config-version: 2
+
+profile: lakehouse
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  lakehouse_dbt:
+    staging:
+      +materialized: view
+      +schema: staging
+      +tags: ["staging"]
+    intermediate:
+      +materialized: ephemeral
+      +tags: ["intermediate"]
+    marts:
+      +materialized: table
+      +schema: marts
+      +tags: ["marts"]
+
+vars:
+  reporting_start_date: "2023-01-01"
